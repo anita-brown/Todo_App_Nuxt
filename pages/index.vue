@@ -3,13 +3,30 @@
   <h1>Task Board</h1>
   <p>Create of list of tasks</p>
   <div class="create-new">
-    <input type="text" v-model="newTask" placeholder="Add a new task">
+    <input type="text" v-model="newTask" placeholder="Add a new task" @keypress.enter="addTask"/>
+    <button @click="addTask">Add</button>
+  </div>
+  <div class="tasks">
+
   </div>
 </main>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  data() {
+    return {
+      newTask: ''
+    }
+  },
+  methods: {
+    addTasks () {
+      if(this.newTask) {
+        this.$store.commit('ADD_TASK', this.newTask)
+        this.newTask = ''
+      }
+    }
+  }
 }
 </script>
