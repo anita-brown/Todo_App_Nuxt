@@ -1,32 +1,38 @@
 <template>
-<main>
-  <h1>Task Board</h1>
-  <p>Create of list of tasks</p>
-  <div class="create-new">
-    <input type="text" v-model="newTask" placeholder="Add a new task" @keypress.enter="addTask"/>
-    <button @click="addTask">Add</button>
-  </div>
-  <div class="tasks">
-
-  </div>
-</main>
+  <main>
+    <h1>Task Board</h1>
+    <p>Create of list of tasks</p>
+    <div class="create-new">
+      <input
+        type="text"
+        v-model="newTask"
+        placeholder="Add a new task"
+        @keypress.enter="addTask" />
+      <button @click="addTask">Add</button>
+    </div>
+    <div class="tasks">
+      <Task v-for="(task, i) in $store.state.tasks"
+       :key="i"
+       :task="task" />
+    </div>
+  </main>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: "IndexPage",
   data() {
     return {
-      newTask: ''
-    }
+      newTask: "",
+    };
   },
   methods: {
-    addTasks () {
-      if(this.newTask) {
-        this.$store.commit('ADD_TASK', this.newTask)
-        this.newTask = ''
+    addTask () {
+      if (this.newTask) {
+        this.$store.commit('ADD_TASK', this.newTask);
+        this.newTask = " ";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
